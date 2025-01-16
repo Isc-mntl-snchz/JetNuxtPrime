@@ -63,7 +63,6 @@ const changeColorMode = () => {
     } else {
         console.log('Color mode is not dark or light:', colorMode.value)
     }
-    console.log('Color mode:', colorMode.value)
 }
 
 const determianteIconMode = computed(() => {
