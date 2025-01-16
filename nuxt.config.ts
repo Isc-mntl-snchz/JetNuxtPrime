@@ -7,8 +7,13 @@ export default defineNuxtConfig({
     "@nuxtjs/google-fonts",
     "@nuxtjs/tailwindcss",
     "@nuxtjs/color-mode",
+    "@nuxt/icon",
   ],
-  css: ["primeicons/primeicons.css", "~/assets/tailwind.css",  "~/assets/styles.css"],
+  css: [
+    "primeicons/primeicons.css",
+    "~/assets/tailwind.css",
+    "~/assets/styles.css",
+  ],
   future: {
     compatibilityVersion: 4,
   },
@@ -43,8 +48,16 @@ export default defineNuxtConfig({
     options: {
       theme: {
         preset: Aura,
+        options: {
+          darkModeSelector: ".dark",
+        },
       },
     },
+  },
+  colorMode: {
+    preference: "system",
+    fallback: "light",
+    classSuffix: "",
   },
   googleFonts: {
     families: {

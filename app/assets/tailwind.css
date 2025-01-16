@@ -7,3 +7,6 @@
 {
     @apply max-w-6xl mx-auto p-4;
 }
+body{
+      @apply transition-colors duration-700;   
+}

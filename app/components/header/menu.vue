@@ -38,12 +38,10 @@
             <template #end>
                 <!-- Avatar  or Sign In/Sign Up -->
                 <div class="flex items-center gap-4">
-                    <button @click="changeColorMode" class="flex items-center gap-2 outline-none">
-                        <Icon :name="determianteIconColorMode" />
+                    <button @click="changeColorMode" class="flex items-center gap-2 outline-none"
+                        v-if="determianteIconMode">
+                        <Icon :name="determianteIconMode" :class="determianteIconColorMode"></Icon>
                     </button>
-                    <span>{{ $colorMode.value }}
-                        <!-- <i :class="determianteIconColorMode" class="text-lg cursor-pointer"></i> -->
-                    </span>
                     <Button size="small" label="Sign In" />
                     <Button size="small" label="Sign Up" />
                     <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle"
@@ -55,28 +53,36 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
 const colorMode = useColorMode()
-onMounted(() => {
-    console.log(colorMode)
-})
 
 const changeColorMode = () => {
     if (colorMode.value === 'dark') {
         colorMode.value = 'light'
-    }
-    if (colorMode.value === 'light') {
+    } else if (colorMode.value === 'light') {
         colorMode.value = 'dark'
+    } else {
+        console.log('Color mode is not dark or light:', colorMode.value)
     }
+    console.log('Color mode:', colorMode.value)
 }
 
-const determianteIconColorMode = computed(() => {
+const determianteIconMode = computed(() => {
     if (colorMode.value === 'dark') {
-        return 'line-md:sunny-filled-loop text-xl text-white animate-spin transition-transform duration-500'
+        return 'line-md:moon'
     }
     if (colorMode.value === 'light') {
-        return 'line-md:moon text-xl text-white transition-transform duration-500'
+        return 'line-md:sunny-filled-loop'
     }
+    return null
+})
+const determianteIconColorMode = computed(() => {
+    if (colorMode.value === 'dark') {
+        return 'text-xl text-white animate-bounce-slow transition-transform duration-500'
+    }
+    if (colorMode.value === 'light') {
+        return 'text-yellow-800 animate-spin-slow transition-transform duration-500'
+    }
+    return 'text-white transition-transform duration-500'
 
 })
 
