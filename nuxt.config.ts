@@ -56,8 +56,11 @@ export default defineNuxtConfig({
   },
   colorMode: {
     preference: "system",
+    globalName: '__NUXT_COLOR_MODE__',
     fallback: "light",
     classSuffix: "",
+    storageKey: "nuxt-color-mode",
+    storage: "localStorage",
   },
   googleFonts: {
     families: {
