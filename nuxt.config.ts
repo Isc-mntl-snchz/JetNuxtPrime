@@ -2,6 +2,9 @@ import Aura from "@primevue/themes/aura";
 export default defineNuxtConfig({
   compatibilityDate: "2024-11-01",
   devtools: { enabled: true },
+  devServer: {
+    port: 5173,
+  },
   modules: [
     "@primevue/nuxt-module",
     "@nuxtjs/google-fonts",
@@ -21,6 +24,9 @@ export default defineNuxtConfig({
   // dir: {
   //   app: "app",
   // },
+  app: {
+    pageTransition: { name: "page", mode: "out-in" },
+  },
   experimental: {
     scanPageMeta: "after-resolve",
     sharedPrerenderData: false,
@@ -56,8 +62,11 @@ export default defineNuxtConfig({
   },
   colorMode: {
     preference: "system",
+    globalName: "__NUXT_COLOR_MODE__",
     fallback: "light",
     classSuffix: "",
+    storageKey: "nuxt-color-mode",
+    storage: "localStorage",
   },
   googleFonts: {
     families: {
