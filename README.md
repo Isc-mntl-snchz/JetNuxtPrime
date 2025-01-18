@@ -62,44 +62,25 @@ La configuración de `@nuxtjs/color-mode` permite alternar entre los modos de co
 - Puedes cambiar el modo de color utilizando `useColorMode`:
 
 ```vue
-<script setup lang="ts">
-const colorMode = useColorMode()
+<script setup lang="ts">const colorMode = useColorMode();
 
 const changeColorMode = () => {
-    if (colorMode.value === 'dark') {
-        colorMode.value = 'light'
-    } else if (colorMode.value === 'light') {
-        colorMode.value = 'dark'
-    } else {
-        console.log('Color mode is not dark or light:', colorMode.value)
-    }
-}
+  colorMode.preference = colorMode.value = (colorMode.value === "dark") ? "light" : "dark";
+};
 
 const determianteIconMode = computed(() => {
-    if (colorMode.value === 'dark') {
-        return 'line-md:moon'
-    }
-    if (colorMode.value === 'light') {
-        return 'line-md:sunny-filled-loop'
-    }
-    return null
-})
-const determianteIconColorMode = computed(() => {
-    if (colorMode.value === 'dark') {
-        return 'text-xl text-white animate-bounce-slow transition-transform duration-500'
-    }
-    if (colorMode.value === 'light') {
-        return 'text-yellow-800 animate-spin-slow transition-transform duration-500'
-    }
-    return 'text-white transition-transform duration-500'
+  return (colorMode.value === "dark") ? "line-md:moon" : "line-md:sunny-filled-loop";
+});
 
-})
+const determianteIconColorMode = computed(() => {
+  return (colorMode.value === "dark") ? "text-xl text-white animate-bounce-slow transition-transform duration-500" : "text-yellow-800 animate-spin-slow transition-transform duration-500";
+});
 </script>
 
 <template>
   <button @click="changeColorMode" class="flex items-center gap-2 outline-none"
-      v-if="determianteIconMode">
-      <Icon :name="determianteIconMode" :class="determianteIconColorMode"></Icon>
+    v-if="!$colorMode.unknown && !$colorMode.forced">
+    <Icon :name="determianteIconMode" :class="determianteIconColorMode"></Icon>
   </button>
 </template>
 ```
@@ -178,8 +159,8 @@ export default {
 
 ## Próximos Pasos
 
-1. **Autenticación**: Agregar autenticación básica utilizando Nuxt.js (con opciones para JWT o OAuth).
-2. **Componentes Adicionales**: Incluir más componentes útiles de PrimeVue.
+1. **Autenticación**: Agregar autenticación básica utilizando Nuxt.js PrimeVue(con opciones para JWT o OAuth).
+2. **Componentes Adicionales**: Incluir más componentes útiles de .
 3. **Documentación**: Expandir la documentación del proyecto.
 
 ---
