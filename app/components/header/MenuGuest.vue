@@ -39,7 +39,8 @@
       <template #end>
         <!-- Avatar  or Sign In/Sign Up -->
         <div class="flex items-center gap-4">
-          <button @click="changeColorMode" class="flex items-center gap-2 outline-none" v-if="determianteIconMode">
+          <button @click="changeColorMode" class="flex items-center gap-2 outline-none"
+            v-if="!$colorMode.unknown && !$colorMode.forced">
             <Icon :name="determianteIconMode" :class="determianteIconColorMode"></Icon>
           </button>
           <Button size="small" label="Sign In" as="router-link" to="/login" />
@@ -54,29 +55,18 @@
 <script setup lang="ts">
 const colorMode = useColorMode();
 
-
 const changeColorMode = () => {
   colorMode.preference = colorMode.value = (colorMode.value === "dark") ? "light" : "dark";
 };
 
 const determianteIconMode = computed(() => {
-  if (colorMode.value === "dark") {
-    return "line-md:moon";
-  }
-  if (colorMode.value === "light") {
-    return "line-md:sunny-filled-loop";
-  }
-  return null;
+  return (colorMode.value === "dark") ? "line-md:moon" : "line-md:sunny-filled-loop";
 });
+
 const determianteIconColorMode = computed(() => {
-  if (colorMode.value === "dark") {
-    return "text-xl text-white animate-bounce-slow transition-transform duration-500";
-  }
-  if (colorMode.value === "light") {
-    return "text-yellow-800 animate-spin-slow transition-transform duration-500";
-  }
-  return "text-white transition-transform duration-500";
+  return (colorMode.value === "dark") ? "text-xl text-white animate-bounce-slow transition-transform duration-500" : "text-yellow-800 animate-spin-slow transition-transform duration-500";
 });
+
 const items = ref([
   {
     label: "Home",
